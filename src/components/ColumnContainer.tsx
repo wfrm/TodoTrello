@@ -7,6 +7,7 @@ import PlusIcon from "../icons/PlusIcon";
 
 
 interface Props{
+  createTask: (columnId: Id) => void;
   deleteColumn: (id: Id) => void;
   column:Column;
   updateColumn: (id: Id, title: string) => void;
@@ -18,7 +19,7 @@ function ColumnContainer(props:Props) {
   const [editMode, setEditMode] = useState(false);
 
 
-  const {column,deleteColumn,  updateColumn,}=props;
+  const {column,deleteColumn,  updateColumn,createTask,}=props;
 
   const {
     setNodeRef,
@@ -143,7 +144,7 @@ function ColumnContainer(props:Props) {
       {/* Column footer */}
       <button
         className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-md p-4 border-x-columnBackgroundColor hover:bg-mainBackgroundColor hover:text-rose-500 active:bg-black"
-        //onClick={() => {{/*createTask(column.id)*/};}}
+        onClick={() => {createTask(column.id);}}
       >
         <PlusIcon />
         Add task

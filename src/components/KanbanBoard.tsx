@@ -24,7 +24,7 @@ function KanbanBoard() {
     const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
-        <DndContext onDragStart={onDragStart}>
+        <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
         <div className="m-auto flex gap-4">
 
             <div className="flex gap-4">
@@ -78,7 +78,33 @@ function KanbanBoard() {
 
     throw new Error("Function not implemented.");
 }
+function onDragEnd(event: DragEndEvent) {
+    setActiveColumn(null);
+   // setActiveTask(null);
+
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    const isActiveAColumn = active.data.current?.type === "Column";
+    if (!isActiveAColumn) return;
+
+    console.log("DRAG END");
+
+    setColumns((columns) => {
+      const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
+
+      const overColumnIndex = columns.findIndex((col) => col.id === overId);
+
+      return arrayMove(columns, activeColumnIndex, overColumnIndex);
+    });
+  }
   
+
 function onDragStart(event: DragStartEvent) {
     console.log("DRAG START,event");
     if (event.active.data.current?.type === "Column") {

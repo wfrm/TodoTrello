@@ -20,7 +20,7 @@ function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
     const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
-
+    const [activeTask, setActiveTask] = useState<Task | null>(null);
     const sensors = useSensors(
         useSensor(PointerSensor, {
           activationConstraint: {
@@ -173,7 +173,7 @@ function onDragStart(event: DragStartEvent) {
     }
 
     if (event.active.data.current?.type === "Task") {
-      //setActiveTask(event.active.data.current.task);
+      setActiveTask(event.active.data.current.task);
       return;
     }
   }

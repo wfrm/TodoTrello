@@ -1,12 +1,41 @@
 import { Column,Id } from "../types"
 import TrashIcon from "../icons/TrashIcon"
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 
 interface Props{
   deleteColumn: (id: Id) => void;
   column:Column;
 }
+
+
+
 function ColumnContainer(props:Props) {
   const {column,deleteColumn}=props;
+
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    //isDragging,
+  
+  } =useSortable({
+    id: column.id,
+    data: {
+      type: "Column",
+      column,
+    },
+    //disabled: editMode,
+  });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
+
   return (
     <div className="  bg-columnBackgroundColor
     w-[350px]

@@ -13,18 +13,31 @@ import {
     useSensors,
   } from "@dnd-kit/core";
 
-  import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+          activationConstraint: {
+            distance: 10,
+          },
+        })
+      );
+    
+
    // const [activeTask, setActiveTask] = useState<Task | null>(null);
     console.log(columns);
     const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
-        <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+        <DndContext 
+        sensors={sensors}
+        onDragStart={onDragStart} 
+        onDragEnd={onDragEnd}>
         <div className="m-auto flex gap-4">
 
             <div className="flex gap-4">

@@ -2,6 +2,7 @@ import { Column,Id } from "../types"
 import TrashIcon from "../icons/TrashIcon"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
 
 
 interface Props{
@@ -12,6 +13,9 @@ interface Props{
 
 
 function ColumnContainer(props:Props) {
+  const [editMode, setEditMode] = useState(false);
+
+
   const {column,deleteColumn}=props;
 
   const {
@@ -68,9 +72,13 @@ function ColumnContainer(props:Props) {
     rounded-md
     flex
     flex-col">
+          {/* Column title */}
       <div  
               {...attributes}
               {...listeners}
+              onClick={() => {
+                setEditMode(true);
+              }}
       className="
       bg-mainBackgroundColor
       text-md
@@ -96,7 +104,7 @@ function ColumnContainer(props:Props) {
         text-sm
         rounded-full
         ">0</div>
-      {column.title};
+      {!editMode &&column.title};
       <button
                 onClick={() => {
                   deleteColumn(column.id);

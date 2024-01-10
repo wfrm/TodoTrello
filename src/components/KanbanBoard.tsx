@@ -49,7 +49,9 @@ function KanbanBoard() {
                        column={col}
                         deleteColumn={deleteColumn}
                            updateColumn={updateColumn}
-                           createTask={createTask} />
+                           createTask={createTask}
+                           tasks={tasks.filter((task) => task.columnId === col.id)}
+                           />
                 ))}
                 </SortableContext>
 

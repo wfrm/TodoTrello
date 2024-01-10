@@ -1,9 +1,10 @@
-import { Column,Id } from "../types"
+import { Column,Id, Task } from "../types"
 import TrashIcon from "../icons/TrashIcon"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
+import TaskCard from "./TaskCard";
 
 
 interface Props{
@@ -11,6 +12,7 @@ interface Props{
   deleteColumn: (id: Id) => void;
   column:Column;
   updateColumn: (id: Id, title: string) => void;
+  tasks: Task[];
 }
 
 
@@ -19,7 +21,7 @@ function ColumnContainer(props:Props) {
   const [editMode, setEditMode] = useState(false);
 
 
-  const {column,deleteColumn,  updateColumn,createTask,}=props;
+  const {column,deleteColumn,  updateColumn,createTask,tasks,}=props;
 
   const {
     setNodeRef,
@@ -139,7 +141,9 @@ function ColumnContainer(props:Props) {
      
       {/* Column task container */}
       <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">
-        contenido
+      {tasks.map((task) => (
+        <div key={task.id}>{task.content}</div>
+          ))}
       </div>
       {/* Column footer */}
       <button

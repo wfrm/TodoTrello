@@ -8,7 +8,10 @@ function KanbanBoard() {
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
         <div className="m-auto flex gap-4">
-            <div className="flex gap-4">{columns.map(col =><ColumnContainer column={col} deleteColumn={deleteColumn}/>)}</div>
+            <div className="flex gap-4">{columns.map(col =>(
+            <ColumnContainer  key={col.id} column={col} deleteColumn={deleteColumn}/>
+            ))}
+            </div>
                 <button onClick={()=>{createNewColumn();}} className=" h-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg border-2   border-columnBackgroundColor bg-mainBackgroundColor p4 ring-rose-500 hover:ring-2 flex gap-2 " > <PlusIcon/>Add column
                 
                 </button>

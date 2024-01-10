@@ -18,8 +18,8 @@ function ColumnContainer(props:Props) {
     setNodeRef,
     attributes,
     listeners,
-    transform,
-    transition,
+    transform,// estilos
+    transition,// estilos
     //isDragging,
   
   } =useSortable({
@@ -37,14 +37,20 @@ function ColumnContainer(props:Props) {
   };
 
   return (
-    <div className="  bg-columnBackgroundColor
+    <div
+    ref={setNodeRef}
+    style={style} 
+    className="  bg-columnBackgroundColor
     w-[350px]
     h-[500px]
     max-h-[500px]
     rounded-md
     flex
     flex-col">
-      <div  className="
+      <div  
+              {...attributes}
+              {...listeners}
+      className="
       bg-mainBackgroundColor
       text-md
       h-[60px]

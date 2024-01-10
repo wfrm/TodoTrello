@@ -13,6 +13,7 @@ interface Props{
   column:Column;
   updateColumn: (id: Id, title: string) => void;
   tasks: Task[];
+  deletTask:(id: Id)=> void;
 }
 
 
@@ -21,7 +22,7 @@ function ColumnContainer(props:Props) {
   const [editMode, setEditMode] = useState(false);
 
 
-  const {column,deleteColumn,  updateColumn,createTask,tasks,}=props;
+  const {column,deleteColumn,  updateColumn,createTask,tasks,deletTask}=props;
 
   const {
     setNodeRef,
@@ -144,6 +145,7 @@ function ColumnContainer(props:Props) {
       {tasks.map((task) => (
         <TaskCard 
         key={task.id}
+        deleteTask={deletTask}
          task={task}/>
         //<div key={task.id}>{task.content}</div>
           ))}

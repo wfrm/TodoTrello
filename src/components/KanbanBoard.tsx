@@ -6,12 +6,10 @@ function KanbanBoard() {
     console.log(columns);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
-        <div className="m-auto">
-            <div>
-                <button onClick={()=>{createNewColumn();}} className=" h-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg border-2   border-columnBackgroundColor bg-mainBackgroundColor p4 ring-rose-500 hover:ring-2 flex gap-2" > <PlusIcon/>Add column
+        <div className="m-auto ">
+                <button onClick={()=>{createNewColumn();}} className=" h-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg border-2   border-columnBackgroundColor bg-mainBackgroundColor p4 ring-rose-500 hover:ring-2 flex gap-2 " > <PlusIcon/>Add column
                 
                 </button>
-            </div>
         </div>
 
     </div>

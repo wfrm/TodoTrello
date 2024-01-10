@@ -2,7 +2,8 @@ import PlusIcon from "../icons/PlusIcon"
 import { useState } from "react";
 import { Column } from "../types";
 function KanbanBoard() {
-    const [columns, setColumns] = useState<Column[]>(defaultCols);
+    const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
+    console.log(columns);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
         <div className="m-auto">

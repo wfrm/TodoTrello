@@ -6,8 +6,8 @@ import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
   task: Task;
-  deleteTask: (id: Id) => void;
-  updateTask: (id: Id, content: string) => void;
+  //deleteTask: (id: Id) => void;
+  //updateTask: (id: Id, content: string) => void;
 }
 
 function TaskCard({ 

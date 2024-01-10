@@ -142,7 +142,10 @@ function ColumnContainer(props:Props) {
       {/* Column task container */}
       <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">
       {tasks.map((task) => (
-        <div key={task.id}>{task.content}</div>
+        <TaskCard 
+        key={task.id}
+         task={task}/>
+        //<div key={task.id}>{task.content}</div>
           ))}
       </div>
       {/* Column footer */}

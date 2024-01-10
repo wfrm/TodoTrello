@@ -23,7 +23,7 @@ function KanbanBoard() {
     const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
-        <DndContext onDragStart={ondragstart}>
+        <DndContext onDragStart={onDragStart}>
         <div className="m-auto flex gap-4">
 
             <div className="flex gap-4">
@@ -66,6 +66,7 @@ function KanbanBoard() {
 }
   
 function onDragStart(event: DragStartEvent) {
+    console.log("DRAG START,event");
     if (event.active.data.current?.type === "Column") {
       setActiveColumn(event.active.data.current.column);
       return;

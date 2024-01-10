@@ -146,6 +146,8 @@ function KanbanBoard() {
     const filteredColumns = columns.filter((col) => col.id !== id);
     setColumns(filteredColumns);
 
+    const newTasks = tasks.filter((t) => t.columnId !== id);
+    setTasks(newTasks);
     throw new Error("Function not implemented.");
 }
 function onDragEnd(event: DragEndEvent) {

@@ -20,12 +20,13 @@ interface Props{
 
 
 function ColumnContainer(props:Props) {
+  const {column,deleteColumn,  updateColumn,createTask,tasks,deletTask,updateTask}=props;
   const [editMode, setEditMode] = useState(false);
   const tasksIds = useMemo(() => {
     return tasks.map((task) => task.id);
   }, [tasks]);
 
-  const {column,deleteColumn,  updateColumn,createTask,tasks,deletTask,updateTask}=props;
+  
 
   const {
     setNodeRef,

@@ -17,11 +17,13 @@ import {
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
+    const [activeColumn, setActiveColumn] = useState<Column | null>(null);
+   // const [activeTask, setActiveTask] = useState<Task | null>(null);
     console.log(columns);
     const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px] justify-center">
-        <DndContext>
+        <DndContext onDragStart={ondragstart}>
         <div className="m-auto flex gap-4">
 
             <div className="flex gap-4">
@@ -63,8 +65,22 @@ function KanbanBoard() {
     throw new Error("Function not implemented.");
 }
   
+function onDragStart(event: DragStartEvent) {
+    if (event.active.data.current?.type === "Column") {
+      setActiveColumn(event.active.data.current.column);
+      return;
+    }
+
+    if (event.active.data.current?.type === "Task") {
+      //setActiveTask(event.active.data.current.task);
+      return;
+    }
+  }
+
  
 }
+
+
 
 export default KanbanBoard
 

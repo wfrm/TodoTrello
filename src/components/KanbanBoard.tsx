@@ -25,7 +25,7 @@ function KanbanBoard() {
         <div className="m-auto flex gap-4">
 
             <div className="flex gap-4">
-                <SortableContext children={undefined} items={columnsId}>
+                <SortableContext items={columnsId}>
                 {columns.map(col =>(
                     <ColumnContainer  key={col.id} column={col} deleteColumn={deleteColumn}/>
                 ))}

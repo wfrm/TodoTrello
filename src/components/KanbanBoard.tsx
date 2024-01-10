@@ -14,6 +14,7 @@ import {
   } from "@dnd-kit/core";
 
   import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { createPortal } from "react-dom";
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
@@ -35,18 +36,24 @@ function KanbanBoard() {
 
 
             </div>
-                <button onClick={()=>{createNewColumn();}} className=" h-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg border-2   border-columnBackgroundColor bg-mainBackgroundColor p4 ring-rose-500 hover:ring-2 flex gap-2 " > <PlusIcon/>Add column
-                
-                </button>
+                <button onClick={()=>{createNewColumn();}} className=" h-[60px] w-[350px] min-w-[350px] cursor-pointer rounded-lg border-2   border-columnBackgroundColor bg-mainBackgroundColor p4 ring-rose-500 hover:ring-2 flex gap-2 " >
+                <PlusIcon/>Add column
+            </button>
+
         </div>
-        </DndContext>
+        {createPortal(
         <DragOverlay>
         {activeColumn && (
-            <ColumnContainer deleteColumn={deleteColumn} 
-                  column={activeColumn}
+            <ColumnContainer 
+                deleteColumn={deleteColumn} 
+                column={activeColumn}
                   />
         )}
-        </DragOverlay>
+        </DragOverlay>,
+        document.body
+        )}
+        </DndContext>
+
 
 
     </div>

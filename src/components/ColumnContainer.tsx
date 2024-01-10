@@ -1,11 +1,12 @@
-import { Column } from "../types"
+import { Column,Id } from "../types"
 import TrashIcon from "../icons/TrashIcon"
 
 interface Props{
+  deleteColumn: (id: Id) => void;
   column:Column;
 }
 function ColumnContainer(props:Props) {
-  const {column}=props;
+  const {column,deleteColumn}=props;
   return (
     <div className="  bg-columnBackgroundColor
     w-[350px]
@@ -41,6 +42,9 @@ function ColumnContainer(props:Props) {
         ">0</div>
       {column.title};
       <button
+                onClick={() => {
+                  deleteColumn(column.id);
+                }}
             className="
         stroke-gray-500
         hover:stroke-white

@@ -3,6 +3,7 @@ import TrashIcon from "../icons/TrashIcon"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
+import PlusIcon from "../icons/PlusIcon";
 
 
 interface Props{
@@ -140,9 +141,13 @@ function ColumnContainer(props:Props) {
         contenido
       </div>
       {/* Column footer */}
-      <div>
-        footer
-      </div>
+      <button
+        className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-md p-4 border-x-columnBackgroundColor hover:bg-mainBackgroundColor hover:text-rose-500 active:bg-black"
+        //onClick={() => {{/*createTask(column.id)*/};}}
+      >
+        <PlusIcon />
+        Add task
+      </button>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { useState } from "react";
 interface Props{
   deleteColumn: (id: Id) => void;
   column:Column;
+  updateColumn: (id: Id, title: string) => void;
 }
 
 
@@ -16,7 +17,7 @@ function ColumnContainer(props:Props) {
   const [editMode, setEditMode] = useState(false);
 
 
-  const {column,deleteColumn}=props;
+  const {column,deleteColumn,  updateColumn,}=props;
 
   const {
     setNodeRef,
@@ -32,7 +33,7 @@ function ColumnContainer(props:Props) {
       type: "Column",
       column,
     },
-    //disabled: editMode,
+    disabled: editMode,
   });
 
   const style = {
@@ -106,14 +107,18 @@ function ColumnContainer(props:Props) {
         ">0</div>
       {!editMode && column.title}
       {editMode && (
-            <input  autoFocus
+            <input 
+            className="bg-black focus:border-rose-500 border rounded outline-none px-2" 
+            onChange={(e) => updateColumn(column.id, e.target.value)}
+            value={column.title}
+            autoFocus
             onBlur={() => {
               setEditMode(false);
             }}>
             </input>
       )}
       <button
-      
+
                 onClick={() => {
                   deleteColumn(column.id);
                 }}

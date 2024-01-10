@@ -43,7 +43,7 @@ function KanbanBoard() {
             <div className="flex gap-4">
                 <SortableContext items={columnsId}>
                 {columns.map(col =>(
-                    <ColumnContainer  key={col.id} column={col} deleteColumn={deleteColumn}/>
+                    <ColumnContainer  key={col.id} column={col} deleteColumn={deleteColumn}   updateColumn={updateColumn}/>
                 ))}
                 </SortableContext>
 
@@ -59,6 +59,7 @@ function KanbanBoard() {
         {activeColumn && (
             <ColumnContainer 
                 deleteColumn={deleteColumn} 
+                updateColumn={updateColumn}
                 column={activeColumn}
                   />
         )}
@@ -85,6 +86,14 @@ function KanbanBoard() {
     /* Generate a random number between 0 and 10000 */
     return Math.floor(Math.random() * 10001);
   }
+  function updateColumn(id: Id, title: string) {
+    const newColumns = columns.map((col) => {
+      if (col.id !== id) return col;
+      return { ...col, title };//no entiendo esto
+    });
+    setColumns(newColumns);
+}
+
   function deleteColumn(id: Id): void {
     const filteredColumns = columns.filter((col) => col.id !== id);
     setColumns(filteredColumns);

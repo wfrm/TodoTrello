@@ -40,6 +40,13 @@ function KanbanBoard() {
                 </button>
         </div>
         </DndContext>
+        <DragOverlay>
+        {activeColumn && (
+            <ColumnContainer deleteColumn={deleteColumn} 
+                  column={activeColumn}
+                  />
+        )}
+        </DragOverlay>
 
 
     </div>

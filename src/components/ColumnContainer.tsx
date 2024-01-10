@@ -104,7 +104,14 @@ function ColumnContainer(props:Props) {
         text-sm
         rounded-full
         ">0</div>
-      {!editMode &&column.title};
+      {!editMode && column.title}
+      {editMode && (
+            <input  autoFocus
+            onBlur={() => {
+              setEditMode(false);
+            }}>
+            </input>
+      )}
       <button
                 onClick={() => {
                   deleteColumn(column.id);

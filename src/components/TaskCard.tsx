@@ -7,13 +7,13 @@ import { CSS } from "@dnd-kit/utilities";
 interface Props {
   task: Task;
   deleteTask: (id: Id) => void;
-  //updateTask: (id: Id, content: string) => void;
+  updateTask: (id: Id, content: string) => void;
 }
 
 function TaskCard({ 
   task,
   deleteTask,
-  //  updateTask
+    updateTask
    }: Props) {
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const [editMode, setEditMode] = useState(true);
@@ -80,7 +80,7 @@ function TaskCard({
               toggleEditMode();
             }
           }}
-          //onChange={(e) => updateTask(task.id, e.target.value)}
+          onChange={(e) => updateTask(task.id, e.target.value)}
         />
       </div>
     );

@@ -15,6 +15,7 @@ import {
 
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
+import TaskCard from "./TaskCard";
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
@@ -77,6 +78,14 @@ function KanbanBoard() {
                 tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
                   />
         )}
+        {activeTask && (
+              <TaskCard
+                task={activeTask}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
+            )}
+
         </DragOverlay>,
         document.body
         )}

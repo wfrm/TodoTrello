@@ -113,6 +113,7 @@ function ColumnContainer(props:Props) {
             </input>
       )}
       <button
+      
                 onClick={() => {
                   deleteColumn(column.id);
                 }}

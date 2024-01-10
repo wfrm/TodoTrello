@@ -1,6 +1,6 @@
 import PlusIcon from "../icons/PlusIcon"
 import { useMemo, useState } from "react";
-import { Column, Id } from "../types";
+import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import {
     DndContext,
@@ -18,6 +18,7 @@ import { createPortal } from "react-dom";
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
+    const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
 
     const sensors = useSensors(

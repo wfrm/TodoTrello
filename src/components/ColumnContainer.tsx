@@ -20,7 +20,7 @@ function ColumnContainer(props:Props) {
     listeners,
     transform,// estilos
     transition,// estilos
-    //isDragging,
+    isDragging,
   
   } =useSortable({
     id: column.id,
@@ -35,6 +35,27 @@ function ColumnContainer(props:Props) {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="
+      bg-columnBackgroundColor
+      opacity-40
+      border-2
+      border-pink-500
+      w-[350px]
+      h-[500px]
+      max-h-[500px]
+      rounded-md
+      flex
+      flex-col
+      "
+      ></div>
+    );
+  }
 
   return (
     <div

@@ -2,6 +2,9 @@ import PlusIcon from "../icons/PlusIcon"
 import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
+import { useColumnsStore } from "../stores/columsStore";
+
+
 import {
     DndContext,
     DragEndEvent,
@@ -18,10 +21,18 @@ import { createPortal } from "react-dom";
 import TaskCard from "./TaskCard";
 
 function KanbanBoard() {
-    const [columns, setColumns] = useState<Column[]>([]);//(defaultCols);
+
+
+  const { columns,addColumn,setColumns} = useColumnsStore();
+
+
+    //const [columns, setColumns] = useState<Column[]>(columns_Z);//(defaultCols);
     const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
     const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+    
+
     const sensors = useSensors(
         useSensor(PointerSensor, {
           activationConstraint: {
@@ -127,7 +138,10 @@ function KanbanBoard() {
       title: `Column ${columns.length + 1}`,
     };
 
-    setColumns([...columns, columnToAdd]);
+     //setColumns([...columns, columnToAdd]);
+    addColumn(columnToAdd);// adicionar a los stados de zustand el orden importa
+    //setColumns(columns_Z);//estado de react
+
   }
 
   function generateId() {
@@ -139,7 +153,7 @@ function KanbanBoard() {
       if (col.id !== id) return col;
       return { ...col, title };//no entiendo esto
     });
-    setColumns(newColumns);
+    setColumns(newColumns);//setColumns(newColumns);
 }
 
   function deleteColumn(id: Id): void {
@@ -167,13 +181,15 @@ function onDragEnd(event: DragEndEvent) {
 
     console.log("DRAG END");
 
-    setColumns((columns) => {
-      const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
 
-      const overColumnIndex = columns.findIndex((col) => col.id === overId);
+    const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
 
-      return arrayMove(columns, activeColumnIndex, overColumnIndex);
-    });
+    const overColumnIndex = columns.findIndex((col) => col.id === overId);
+
+    const newColumns=  arrayMove(columns, activeColumnIndex, overColumnIndex) as Column[];
+
+    setColumns(newColumns);
+
   }
   
 

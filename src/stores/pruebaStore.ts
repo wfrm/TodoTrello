@@ -7,9 +7,13 @@ type TContadorStoreState={
 
 };
 
-export const useContadorStore= create<TContadorStoreState>()((set)=>({
-contador:0,
-incrementarContador:()=>set((state)=>({
-    contador:state.contador+1,
-}))
-}))
+export const useContadorStore= create<TContadorStoreState>()(
+    persist( 
+        (set)=>({
+        contador:10,
+        incrementarContador:()=>set((state)=>({
+            contador:state.contador+1,
+        }))
+        }),{name:"contador storage"})
+
+);

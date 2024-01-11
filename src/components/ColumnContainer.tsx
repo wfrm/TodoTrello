@@ -5,6 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
 import TaskCard from "./TaskCard";
+import {useContadorStore} from "../stores/pruebaStore"
 
 
 interface Props{
@@ -22,6 +23,8 @@ interface Props{
 function ColumnContainer(props:Props) {
   const {column,deleteColumn,  updateColumn,createTask,tasks,deletTask,updateTask}=props;
   const [editMode, setEditMode] = useState(false);
+
+  const {contador}=useContadorStore();
   const tasksIds = useMemo(() => {
     return tasks.map((task) => task.id);
   }, [tasks]);
@@ -104,7 +107,7 @@ function ColumnContainer(props:Props) {
       items-center
       justify-between
       ">
-        <div className="
+        <p className="
         flex
         justify-center
         items-center
@@ -113,7 +116,7 @@ function ColumnContainer(props:Props) {
         py-1
         text-sm
         rounded-full
-        ">0</div>
+        ">{contador}</p>
       {!editMode && column.title}
       {editMode && (
             <input 

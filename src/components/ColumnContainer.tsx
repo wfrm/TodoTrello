@@ -25,7 +25,7 @@ function ColumnContainer(props:Props) {
   const [editMode, setEditMode] = useState(false);
 
   const {contador}=useContadorStore();
-  const tasksIds = useMemo(() => {
+  const tasksIds = useMemo(() => {// memo? que es esto
     return tasks.map((task) => task.id);
   }, [tasks]);
 
@@ -116,7 +116,7 @@ function ColumnContainer(props:Props) {
         py-1
         text-sm
         rounded-full
-        ">{contador}</p>
+        ">{tasksIds.length}</p>
       {!editMode && column.title}
       {editMode && (
             <input 

@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import { useColumnsStore } from "../stores/columsStore";
+import { usetasksStore } from "../stores/cardsStore";
 
 
 import {
@@ -24,10 +25,11 @@ function KanbanBoard() {
 
 
   const { columns,addColumn,setColumns} = useColumnsStore();
+  //const [columns, setColumns] = useState<Column[]>(columns_Z);//(defaultCols);
 
+  const {tasks,addTask,setTasks}=usetasksStore();
+  //const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
 
-    //const [columns, setColumns] = useState<Column[]>(columns_Z);//(defaultCols);
-    const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
     const [activeTask, setActiveTask] = useState<Task | null>(null);
 
@@ -222,31 +224,33 @@ function onDragStart(event: DragStartEvent) {
 
     // Im dropping a Task over another Task
     if (isActiveATask && isOverATask) {
-      setTasks((tasks) => {
-        const activeIndex = tasks.findIndex((t) => t.id === activeId);
-        const overIndex = tasks.findIndex((t) => t.id === overId);
 
-        if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
-          // Fix introduced after video recording
-          tasks[activeIndex].columnId = tasks[overIndex].columnId;
-          return arrayMove(tasks, activeIndex, overIndex - 1);
-        }
 
-        return arrayMove(tasks, activeIndex, overIndex);
-      });
+      const activeIndex = tasks.findIndex((t) => t.id === activeId);
+      const overIndex = tasks.findIndex((t) => t.id === overId);
+      var newTasks:Task[]=[];
+      if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
+        // Fix introduced after video recording
+        tasks[activeIndex].columnId = tasks[overIndex].columnId;
+        newTasks= arrayMove(tasks, activeIndex, overIndex - 1);
+      }
+
+      newTasks= arrayMove(tasks, activeIndex, overIndex);
+
+      setTasks(newTasks);
     }
 
     const isOverAColumn = over.data.current?.type === "Column";
 
     // Im dropping a Task over a column
-    if (isActiveATask && isOverAColumn) {
-      setTasks((tasks) => {
-        const activeIndex = tasks.findIndex((t) => t.id === activeId);
 
-        tasks[activeIndex].columnId = overId;
-        console.log("DROPPING TASK OVER COLUMN", { activeIndex });
-        return arrayMove(tasks, activeIndex, activeIndex);
-      });
+    if (isActiveATask && isOverAColumn) {
+      const activeIndex = tasks.findIndex((t) => t.id === activeId);
+
+      tasks[activeIndex].columnId = overId;
+      console.log("DROPPING TASK OVER COLUMN", { activeIndex });
+      const newTask= arrayMove(tasks, activeIndex, activeIndex);
+      setTasks(newTask);
     }
   }
  

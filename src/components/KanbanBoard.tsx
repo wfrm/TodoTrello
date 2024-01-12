@@ -27,7 +27,7 @@ function KanbanBoard() {
   const { columns,addColumn,setColumns} = useColumnsStore();
   //const [columns, setColumns] = useState<Column[]>(columns_Z);//(defaultCols);
 
-  const {tasks,addTask,setTasks}=usetasksStore();
+  const {tasks,setTasks}=usetasksStore();
   //const [tasks, setTasks] = useState<Task[]>([]);//(defaultTasks);
 
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);

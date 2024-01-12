@@ -1,4 +1,4 @@
-import { useState } from 'react'
+//import { useState } from 'react'
 import './App.css'
 import KanbanBoard from './components/KanbanBoard';
 import Sumador from './components/Sumador';

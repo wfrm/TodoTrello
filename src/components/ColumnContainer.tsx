@@ -24,7 +24,7 @@ function ColumnContainer(props:Props) {
   const {column,deleteColumn,  updateColumn,createTask,tasks,deletTask,updateTask}=props;
   const [editMode, setEditMode] = useState(false);
 
-  const {contador}=useContadorStore();
+  //const {contador}=useContadorStore();
   const tasksIds = useMemo(() => {// memo? que es esto
     return tasks.map((task) => task.id);
   }, [tasks]);

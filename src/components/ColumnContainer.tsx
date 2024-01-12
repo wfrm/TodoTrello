@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
 import TaskCard from "./TaskCard";
-import {useContadorStore} from "../stores/pruebaStore"
+//import {useContadorStore} from "../stores/pruebaStore"
 
 
 interface Props{
